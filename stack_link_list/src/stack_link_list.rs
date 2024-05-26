@@ -1,3 +1,5 @@
+use std::mem::replace;
+
 //定义的链表节点的基本架构包含了值和下一个节点的连接
 #[derive(PartialEq, Eq, Debug)]
 struct Node<T> {
@@ -39,6 +41,14 @@ impl<T> List<T> {
                 self.head = node.next;
                 result
             }
+        }
+    }
+}
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut cur_link_node = replace(&mut self.head, Link::Empty);
+        while let Link::More(mut boxed_node) = cur_link_node {
+            cur_link_node = replace(&mut boxed_node.next, Link::Empty);
         }
     }
 }
