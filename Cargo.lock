@@ -3,5 +3,9 @@
 version = 3
 
 [[package]]
+name = "single_direction_link_list"
+version = "0.1.0"
+
+[[package]]
 name = "stack_link_list"
 version = "0.1.0"
